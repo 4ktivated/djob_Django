@@ -11,6 +11,7 @@ class VacHandler():
     def __init__(self, lang: str) -> None:
         self.lang = lang.lower()
         self.func_list = list(filter(lambda x: x[0] == 'j',dir(self)))
+        #фильтрация методов объекта по первой букве что бы в списке были только те что парсят вакансии
 
 
     def get_base(self):
@@ -103,8 +104,3 @@ class VacHandler():
         # else:
         #     print(f"Request failed with status code: {response.status_code}")
     
-
-
-exaple = VacHandler('python')
-
-print(exaple.func_list)
