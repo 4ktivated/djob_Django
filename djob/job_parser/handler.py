@@ -1,4 +1,3 @@
-
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import lxml
@@ -17,7 +16,7 @@ class VacHandler():
     def get_base(self):
         if not self.vac_base:
             for func in self.func_list:
-                func(self.lang)
+                eval(f"self.{func}" + "()") #забыл что dir возфращает list[str] так что без eval() никак пока что 
         return self.vac_base
         
 
@@ -103,4 +102,4 @@ class VacHandler():
                 
         # else:
         #     print(f"Request failed with status code: {response.status_code}")
-    
+
