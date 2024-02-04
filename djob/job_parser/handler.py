@@ -5,6 +5,7 @@ import requests
 import time
 
 class VacHandler():
+    #необходимо именовать новые алгоритмы парсинга jobs_*имя*
     vac_base = []
 
     def __init__(self, lang: str) -> None:
@@ -13,24 +14,20 @@ class VacHandler():
         #фильтрация методов объекта по первой букве что бы в списке были только те что парсят вакансии
 
 
-    def get_base(self):
-        if not self.vac_base:
-            for func in self.func_list:
-                eval(f"self.{func}" + "()") #забыл что dir возфращает list[str] так что без eval() никак пока что 
+    def fill_data(self):
+        for func in self.func_list:
+            eval(f"self.{func}" + "()")
         return self.vac_base
-        
 
 
     def jobs_geekjob(self):
         url = "https://geekjob.ru/vacancies?qs=" + self.lang
         browser = webdriver.Chrome()
     
-
         browser.get(url)
         time.sleep(2)
         html = browser.page_source
         soup = BeautifulSoup(html, 'lxml')
-
     
         for vacaincie in soup.find_all('li', class_ = 'collection-item avatar'):
             name = vacaincie.find('p', class_ = 'truncate company-name').text.strip()
@@ -40,9 +37,8 @@ class VacHandler():
             if not info:
                 info = 'Не указанно'
             link = 'https://geekjob.ru' + vacaincie.a['href']
-            
         
-            self.vac_base.append({'lang': self.lang, 'Title': title, 'Company': name, 'URL': link, 'Salary': 'из-за источника все даныне в инфо', 'Info': info})
+            self.vac_base.append({'lang': self.lang, 'title': title, 'company': name, 'url': link, 'salary': 'из-за источника все даныне в инфо', 'info': info})
 
 
     def jobs_habr(self):
@@ -63,7 +59,7 @@ class VacHandler():
                     salary = box.find('div', class_ = 'vacancy-card__salary').text
                 else:
                     salary = 'Не указанна'
-                self.vac_base.append({'lang': self.lang, 'Title': title, 'Company': name, 'URL': link, 'Salary': salary, 'Info': stack})
+                self.vac_base.append({'lang': self.lang, 'title': title, 'company': name, 'url': link, 'salary': salary, 'info': stack})
 
 
     def jobs_hh(self):
@@ -98,8 +94,7 @@ class VacHandler():
                 else:
                     salary = 'Не указанна'
                     
-                self.vac_base.append({'lang': self.lang, 'Title': vacancy_title, 'Company': company_name, 'URL': vacancy_url, 'Salary': salary, 'Info': experience})
+                self.vac_base.append({'lang': self.lang, 'title': vacancy_title, 'company': company_name, 'url': vacancy_url, 'salary': salary, 'info': experience})
                 
         # else:
         #     print(f"Request failed with status code: {response.status_code}")
-
