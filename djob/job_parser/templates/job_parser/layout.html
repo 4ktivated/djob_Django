@@ -1,11 +1,15 @@
-<html lang="en">
+{% load static %}
+<!doctype html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} NO title {% endblock title %}</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'job_parser/css/style.css' %}" />
+
 </head>
 <body>
-    <header> some info</header>
+
     <div>{% block content %} NO content {% endblock content %}</div>
 </body>
 </html>

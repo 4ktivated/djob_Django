@@ -23,3 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('job_parser.urls'))
 ]
+
+handler404 = views.not_found 

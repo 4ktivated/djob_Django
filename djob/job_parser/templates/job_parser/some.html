@@ -1,0 +1,21 @@
+{% extends "job_parser/layout.html" %}
+
+{% block title %} Job Parser {% endblock title %}
+
+{% block content %}
+
+<div class="card-container">
+{% for el in vac_list %}
+
+    <div class="card">{{el.title}}
+        <h5 class="card-title">Компания : {{ el.company}}</h5>
+        <p class="card-text">Быстрая информация : {{ el.info }}</p>
+        <p class="card-text">Зарплата : {{  el.salary }}</p>
+        <a href="{{ el.url }}" target="_blank">Переход куда-нибудь</a>
+        <p class="card-text">Поисковой запрос : {{el.lang}}</p>
+    </div>
+
+{% endfor %}
+</div>
+
+{% endblock content %}

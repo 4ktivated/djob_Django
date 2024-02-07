@@ -38,7 +38,7 @@ class VacHandler():
                 info = 'Не указанно'
             link = 'https://geekjob.ru' + vacaincie.a['href']
         
-            self.vac_base.append({'lang': self.lang, 'title': title, 'company': name, 'url': link, 'salary': 'из-за источника все даныне в инфо', 'info': info})
+            self.vac_base.append({'lang': self.lang, 'title': title, 'company': name, 'url': link, 'salary': 'из-за источника все данные в инфо', 'info': info})
 
 
     def jobs_habr(self):
