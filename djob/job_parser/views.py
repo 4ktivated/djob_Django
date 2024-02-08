@@ -14,6 +14,10 @@ def get_vbl(request, lang):
 def not_found(request, exception):
     return HttpResponseNotFound('<h1>Такой страницы нет</h1>')
 
+def empty_base(request):
+    crud.clear_base()
+    return HttpResponse('base is empty')
+
 class ExampleView(TemplateView):
     template_name = 'some.html'
 
