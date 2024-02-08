@@ -17,3 +17,6 @@ def create_vacs(lang: str):
 def get_vacs_by_lang(lang: str):
     return models.Vacancies.objects.filter(lang=lang)
     
+
+def clear_base():
+    models.Vacancies.objects.all().delete()
